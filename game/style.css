@@ -211,8 +211,8 @@ body{
 @keyframes sparkle{from{transform:scale(.7) rotate(-10deg); opacity:.6}to{transform:scale(1.2) rotate(12deg); opacity:1}}
 
 /* ---------- INGREDIENT COUNTER ---------- */
-#counter{margin-top:6px; background:linear-gradient(180deg,#2e1c0a,#1d1206); border:2px solid var(--line); border-radius:12px; padding:4px 10px}
-#ingredients{display:grid; grid-template-columns:repeat(7,1fr); gap:5px}
+#counter{margin-top:6px; background:linear-gradient(180deg,#2e1c0a,#1d1206); border:2px solid var(--line); border-radius:12px; padding:3px 10px}
+#ingredients{display:grid; grid-template-columns:repeat(7,1fr); gap:4px}
 .ing{background:linear-gradient(180deg,#fff8e6,#ffe9a8); color:var(--ink); border:3px solid #d9a441; border-radius:12px; padding:3px 4px 2px; cursor:pointer; text-align:center;
   transition:transform .12s ease, box-shadow .12s ease, border-color .12s; box-shadow:0 3px 0 #8a6d2b; user-select:none}
 .ing:hover{transform:translateY(-3px) scale(1.03); border-color:#ff7b1c; box-shadow:0 6px 0 #8a6d2b, 0 8px 14px rgba(0,0,0,.4)}
