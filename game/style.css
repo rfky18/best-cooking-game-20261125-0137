@@ -1,0 +1,307 @@
+/* NASGOR RUSH — premium indie cooking game styles. All art via CSS/SVG, no external assets. */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#f5b301; --gold2:#ffd34d; --red:#e63946; --cream:#fff3d6; --ink:#2b1a08;
+  --panel:#241708; --panel2:#3a2410; --line:#6b4423; --green:#7bc043; --orange:#ff7b1c;
+}
+html,body{height:100%}
+body{
+  font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif; color:var(--cream);
+  background:#0b0714; overflow-x:hidden;
+}
+#app{min-height:100vh; position:relative; overflow:hidden;
+  background:radial-gradient(1200px 600px at 50% -10%, #2a1a4d 0%, #12081f 55%, #0b0714 100%);}
+#city{position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    radial-gradient(2px 2px at 12% 78%, #ffd34d88, transparent 60%),
+    radial-gradient(2px 2px at 28% 84%, #7fd4ff88, transparent 60%),
+    radial-gradient(3px 3px at 45% 76%, #ff9d5c88, transparent 60%),
+    radial-gradient(2px 2px at 63% 82%, #ffd34d77, transparent 60%),
+    radial-gradient(2px 2px at 79% 74%, #ff7b7b88, transparent 60%),
+    radial-gradient(2px 2px at 91% 85%, #7fd4ff77, transparent 60%),
+    radial-gradient(1px 1px at 5% 30%, #ffffff99, transparent 60%),
+    radial-gradient(1px 1px at 22% 18%, #ffffff88, transparent 60%),
+    radial-gradient(1px 1px at 38% 28%, #ffffff99, transparent 60%),
+    radial-gradient(1px 1px at 55% 14%, #ffffff88, transparent 60%),
+    radial-gradient(1px 1px at 71% 24%, #ffffff99, transparent 60%),
+    radial-gradient(1px 1px at 88% 16%, #ffffff88, transparent 60%),
+    radial-gradient(1px 1px at 97% 32%, #ffffff99, transparent 60%);
+  animation:twinkle 4s ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:.55}to{opacity:1}}
+.screen{display:none; position:relative; z-index:1; max-width:1240px; margin:0 auto; padding:6px 12px 2px}
+.screen.active{display:block}
+
+/* ---------- BUTTONS (game juice: hover/press) ---------- */
+.btn{
+  font-family:inherit; font-weight:800; color:var(--ink); cursor:pointer;
+  background:linear-gradient(180deg,#ffe9a8,#f5b301); border:3px solid #7a4a00;
+  border-radius:14px; padding:10px 16px; font-size:15px; letter-spacing:.3px;
+  box-shadow:0 4px 0 #7a4a00, 0 6px 14px rgba(0,0,0,.45);
+  transition:transform .08s ease, box-shadow .08s ease, filter .15s ease;
+}
+.btn:hover{filter:brightness(1.08); transform:translateY(-2px); box-shadow:0 6px 0 #7a4a00, 0 10px 18px rgba(0,0,0,.5)}
+.btn:active{transform:translateY(2px) scale(.98); box-shadow:0 1px 0 #7a4a00}
+.btn:disabled{opacity:.45; cursor:not-allowed; transform:none; filter:grayscale(.4)}
+.btn-primary{background:linear-gradient(180deg,#ffb347,#ff7b1c); border-color:#8a2f00; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.btn-gold{background:linear-gradient(180deg,#fff0b3,#ffd34d); border-color:#8a6d00}
+.btn-fire{background:linear-gradient(180deg,#ff9a3d,#e63946); border-color:#6d0f16; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.btn-big{font-size:17px; padding:10px 20px; border-radius:16px}
+.btn-small{font-size:13px; padding:7px 10px; border-radius:10px}
+.btn.danger{background:linear-gradient(180deg,#ff8a8a,#d62828); border-color:#5f0d0d; color:#fff}
+.pill{background:#2b1a08; color:#ffd34d; border-radius:999px; padding:1px 8px; font-size:12px}
+
+/* ---------- MENU ---------- */
+.stall-frame{max-width:920px; margin:0 auto; text-align:center; padding-top:6px}
+.awning{display:flex; height:34px; border-radius:12px 12px 0 0; overflow:hidden; border:3px solid #7a1f1f; border-bottom:none}
+.awning span{flex:1; background:repeating-linear-gradient(90deg,#e63946 0 50%, #fff3d6 50% 100%)}
+.awning span:nth-child(even){background:repeating-linear-gradient(90deg,#fff3d6 0 50%, #e63946 50% 100%)}
+.lantern-row{display:flex; justify-content:center; gap:34px; padding:4px 0 0}
+.lantern{width:26px; height:34px; border-radius:50% 50% 46% 46%; position:relative;
+  background:radial-gradient(circle at 35% 30%, #ffe9a8, #ff7b1c 60%, #c33d00);
+  box-shadow:0 0 18px 6px rgba(255,150,40,.55); transform-origin:top center; animation:sway 3.2s ease-in-out infinite alternate}
+.lantern::before{content:""; position:absolute; top:-14px; left:50%; width:2px; height:14px; background:#8a6d3b; transform:translateX(-50%)}
+.lantern::after{content:""; position:absolute; bottom:-4px; left:50%; width:10px; height:5px; background:#f5b301; border-radius:0 0 6px 6px; transform:translateX(-50%)}
+.lantern.l2{animation-delay:-.6s}.lantern.l3{animation-delay:-1.2s}.lantern.l4{animation-delay:-1.8s}.lantern.l5{animation-delay:-2.4s}
+@keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+.neon-sign{margin:10px auto 2px; padding:8px 10px; display:inline-block; border:4px solid #ff4d6d; border-radius:18px;
+  background:#1a0512; box-shadow:0 0 24px rgba(255,77,109,.75), inset 0 0 18px rgba(255,77,109,.35)}
+.neon-text{font-size:56px; font-weight:900; letter-spacing:4px; color:#fff;
+  text-shadow:0 0 6px #ff4d6d, 0 0 18px #ff4d6d, 0 0 34px #ff4d6d; animation:neonFlicker 4s linear infinite}
+.neon-text2{display:block; font-size:30px; letter-spacing:14px; color:#7df9ff;
+  text-shadow:0 0 6px #19c3e6, 0 0 18px #19c3e6}
+@keyframes neonFlicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:.55}94%{opacity:1}96%{opacity:.7}97%{opacity:1}}
+.tagline{font-size:15px; color:#ffd34d; margin:6px 0 16px; font-style:italic}
+.menu-buttons{display:flex; flex-direction:column; gap:10px; align-items:center}
+.menu-row{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+.menu-info{display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+.info-card{background:linear-gradient(180deg,#3a2410,#241708); border:2px solid var(--line); border-radius:14px; padding:12px 16px; min-width:200px; text-align:left; box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.info-title{font-size:13px; color:#ffb347; font-weight:800; letter-spacing:.5px}
+.info-body{font-size:15px; margin-top:4px}
+.info-body.big{font-size:24px; font-weight:900; color:#ffd34d}
+.info-body.small{font-size:12.5px; color:#d9c9a8}
+.credit{margin-top:16px; font-size:12px; color:#9a8a70}
+
+/* ---------- HUD ---------- */
+#hud{display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+  background:linear-gradient(180deg,#3a2410,#241708); border:2px solid var(--line); border-radius:12px; padding:5px 10px; box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.hud-logo{font-size:18px; font-weight:900; color:#ffd34d; letter-spacing:1px; margin-right:4px}
+.hud-stat{background:#120a04; border:1px solid #5a3a1a; border-radius:9px; padding:4px 8px; font-size:13px}
+.hud-stat b{color:#ffd34d}
+.hud-stat .dim{color:#a08a68}
+.hud-stat.combo{background:linear-gradient(180deg,#ff7b1c,#e63946); color:#fff; animation:comboPop .3s ease; border-color:#ffb347}
+.hud-stat.combo b{color:#fff}
+@keyframes comboPop{0%{transform:scale(1.4)}100%{transform:scale(1)}}
+.hud-stat.event{background:#12351f; border-color:#2fae5f; color:#b8ffce}
+#hud .btn{margin-left:auto}
+#btn-music,#btn-sfx{margin-left:0}
+
+/* ---------- EVENT BANNER ---------- */
+#event-banner{margin-top:8px; text-align:center; font-weight:900; font-size:17px; padding:8px; border-radius:12px;
+  background:linear-gradient(90deg,#7b2ff7,#e63946,#ff7b1c); box-shadow:0 0 20px rgba(255,123,28,.6); animation:bannerIn .35s ease}
+#event-banner.hidden{display:none}
+@keyframes bannerIn{from{transform:scale(.85); opacity:0}to{transform:scale(1); opacity:1}}
+
+/* ---------- ORDER BOARD ---------- */
+#order-board{margin-top:6px; background:linear-gradient(180deg,#2e1c0a,#1d1206); border:2px solid var(--line); border-radius:12px; padding:6px 10px}
+.board-title{font-weight:900; letter-spacing:.5px; color:#ffd34d; font-size:14px; margin-bottom:5px}
+.board-title .dim{color:#a08a68; font-weight:400; font-size:12.5px}
+#customers{display:flex; gap:10px; flex-wrap:wrap}
+.empty-note{color:#a08a68; font-style:italic; padding:6px 2px}
+.customer{flex:1 1 240px; max-width:340px; background:#fff8e6; color:var(--ink); border-radius:12px; padding:6px 9px;
+  border:3px solid #d9a441; box-shadow:0 4px 10px rgba(0,0,0,.4); position:relative; transition:transform .15s ease, border-color .15s}
+.customer:hover{transform:translateY(-2px)}
+.customer.urgent{border-color:#e63946; animation:urgentPulse 1s ease-in-out infinite}
+@keyframes urgentPulse{0%,100%{box-shadow:0 0 0 0 rgba(230,57,70,.0)}50%{box-shadow:0 0 0 5px rgba(230,57,70,.35)}}
+.customer.vip{border-color:#b8860b; background:linear-gradient(180deg,#fff8d6,#ffe9a8)}
+.customer.vip::before{content:"👑 VIP"; position:absolute; top:-11px; right:10px; background:#b8860b; color:#fff; font-size:11px; font-weight:900; padding:2px 8px; border-radius:999px}
+.customer.leaving{opacity:.4; filter:grayscale(.7)}
+.cust-head{display:flex; gap:10px; align-items:center}
+.cust-face{width:40px; height:40px; flex:0 0 40px}
+.cust-name{font-weight:900; font-size:14px}
+.cust-type{font-size:11.5px; color:#7a5a2a}
+.cust-dish{font-weight:800; font-size:13px; color:#8a2f00; margin-top:1px}
+.cust-recipe{display:flex; flex-wrap:wrap; gap:3px; margin-top:4px}
+.cust-recipe .chip{background:#ffe9a8; border:1px solid #d9a441; border-radius:999px; padding:1px 6px; font-size:11px; font-weight:700}
+.cust-patience{height:8px; background:#e8d9b0; border-radius:999px; margin-top:5px; overflow:hidden}
+.cust-patience > div{height:100%; background:linear-gradient(90deg,#7bc043,#a4d65e); border-radius:999px; transition:width .3s linear}
+.cust-patience.low > div{background:linear-gradient(90deg,#e63946,#ff7b1c)}
+.cust-quote{font-size:11.5px; font-style:italic; color:#7a5a2a; margin-top:3px; min-height:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.cust-mood{position:absolute; top:8px; right:10px; font-size:22px}
+
+/* ---------- STAGE ---------- */
+#stage{margin-top:6px; background:linear-gradient(180deg,#4a2c12 0%, #2e1c0a 45%, #1d1206 100%); border:2px solid var(--line); border-radius:14px; padding:8px 10px; position:relative; overflow:hidden}
+#stage::before{content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:radial-gradient(600px 200px at 50% 0%, rgba(255,180,60,.25), transparent 70%)}
+.stall-back{text-align:center; position:relative}
+.stall-sign{display:inline-block; background:#7a1f1f; color:#ffe9a8; font-weight:900; letter-spacing:2px; font-size:12px; padding:3px 14px; border-radius:8px; border:2px solid #ffb347}
+.lantern-row.small{gap:22px}
+.lantern-row.small .lantern{width:14px; height:19px}
+.decor-banner{margin:4px auto 0; display:inline-block; background:#12351f; color:#b8ffce; font-weight:900; padding:3px 10px; border-radius:999px; font-size:12px; border:2px solid #2fae5f}
+.decor-banner.hidden,.decor-plant.hidden{display:none}
+.decor-plant{position:absolute; right:18px; top:2px; font-size:28px}
+.stage-row{display:flex; gap:10px; margin-top:6px; flex-wrap:wrap}
+#wok-area{flex:1 1 520px; background:rgba(0,0,0,.28); border:2px solid #5a3a1a; border-radius:12px; padding:7px 10px}
+.wok-label{font-weight:900; color:#ffb347; font-size:13px; letter-spacing:.5px}
+#stove{position:relative; margin:2px auto 0; width:380px; max-width:100%; height:126px}
+#wok{position:absolute; left:50%; top:10px; transform:translateX(-50%); width:360px; max-width:100%; height:106px;
+  background:radial-gradient(ellipse at 50% 30%, #4a4a52, #232328 65%, #141416);
+  border-radius:0 0 180px 180px / 0 0 130px 130px; border:4px solid #0c0c0e; box-shadow:inset 0 8px 18px rgba(0,0,0,.8), 0 6px 0 #3a3a40}
+#wok.shake{animation:wokShake .3s ease}
+@keyframes wokShake{0%,100%{transform:translateX(-50%) rotate(0)}25%{transform:translateX(calc(-50% - 5px)) rotate(-2deg)}75%{transform:translateX(calc(-50% + 5px)) rotate(2deg)}}
+#wok.cooking{animation:wokToss 1.1s ease-in-out infinite}
+@keyframes wokToss{0%,100%{transform:translateX(-50%) translateY(0) rotate(0)}30%{transform:translateX(-50%) translateY(-7px) rotate(-2.5deg)}60%{transform:translateX(-50%) translateY(2px) rotate(2deg)}}
+#fx{position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none}
+#wok-food{position:absolute; left:50%; top:52%; transform:translate(-50%,-50%); font-size:24px; letter-spacing:2px; text-align:center; width:90%; line-height:1.1}
+#wok-food .food-bit{display:inline-block; animation:foodBob 1s ease-in-out infinite alternate}
+@keyframes foodBob{from{transform:translateY(0) rotate(-4deg)}to{transform:translateY(-4px) rotate(4deg)}}
+#spatula{position:absolute; right:6px; top:-14px; font-size:30px; transform:rotate(28deg); filter:drop-shadow(2px 2px 2px rgba(0,0,0,.5))}
+#wok.cooking ~ #spatula, #stove.cooking #spatula{animation:stir 1s ease-in-out infinite}
+@keyframes stir{0%,100%{transform:rotate(28deg) translateY(0)}50%{transform:rotate(6deg) translateY(6px)}}
+.flame{position:absolute; bottom:-6px; width:24px; height:0; border-radius:50% 50% 45% 45%; opacity:0; transition:height .3s; filter:blur(1px)}
+#stove.cooking .flame{opacity:1; animation:flameFlick .28s ease-in-out infinite alternate}
+.flame.f1{left:32%; background:linear-gradient(180deg,#ffd34d,#ff7b1c 60%,#e63946); height:34px}
+.flame.f2{left:47%; background:linear-gradient(180deg,#fff0b3,#ff9a3d 60%,#ff5722); height:44px; animation-delay:-.1s}
+.flame.f3{left:62%; background:linear-gradient(180deg,#ffd34d,#ff7b1c 60%,#e63946); height:32px; animation-delay:-.2s}
+@keyframes flameFlick{from{transform:scaleY(.85) scaleX(1)}to{transform:scaleY(1.15) scaleX(.92)}}
+.cook-status{text-align:center; font-weight:800; margin-top:4px; min-height:18px; font-size:14px}
+.cook-status.perfect{color:#7dff9b; text-shadow:0 0 12px rgba(125,255,155,.7)}
+.cook-status.burned{color:#ff8a8a}
+.progress-wrap{margin-top:4px}
+#cook-bar{position:relative; height:16px; background:#120a04; border:2px solid #5a3a1a; border-radius:999px; overflow:hidden}
+#cook-fill{height:100%; width:0%; background:linear-gradient(90deg,#7bc043,#ffd34d 55%,#ff7b1c 85%,#e63946); transition:width .12s linear}
+#cook-perfect-zone{position:absolute; top:0; bottom:0; left:45%; width:40%; background:rgba(125,255,155,.28); border-left:2px dashed #7dff9b; border-right:2px dashed #7dff9b}
+.progress-marks{display:flex; justify-content:space-between; font-size:11px; color:#a08a68; padding:2px 4px 0}
+.progress-marks span:nth-child(2){color:#7dff9b; font-weight:800}
+.wok-contents{display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; min-height:24px}
+.wok-contents .chip{background:#ffe9a8; color:var(--ink); border:1px solid #d9a441; border-radius:999px; padding:3px 9px; font-size:12.5px; font-weight:800; animation:chipIn .25s ease}
+@keyframes chipIn{from{transform:scale(.5); opacity:0}to{transform:scale(1); opacity:1}}
+.wok-contents .empty{color:#a08a68; font-size:13px; font-style:italic}
+
+#plate-area{flex:1 1 300px; background:rgba(0,0,0,.28); border:2px solid #5a3a1a; border-radius:12px; padding:7px 10px; text-align:center}
+#plate{margin:4px auto 3px; width:220px; height:110px; border-radius:50%; position:relative;
+  background:radial-gradient(circle at 50% 38%, #ffffff, #e8e0cc 70%, #cbbfa0);
+  border:4px solid #b8a67e; box-shadow:0 8px 18px rgba(0,0,0,.5), inset 0 0 0 10px #f4ecd6}
+#plate.perfect-glow{animation:plateGlow 1.2s ease-in-out infinite alternate; border-color:#ffd34d}
+@keyframes plateGlow{from{box-shadow:0 0 12px 2px rgba(255,211,77,.5), inset 0 0 0 10px #f4ecd6}to{box-shadow:0 0 30px 10px rgba(255,211,77,.9), inset 0 0 0 10px #fff8dd}}
+#plate-dish{position:absolute; inset:14px; display:flex; align-items:center; justify-content:center; flex-direction:column}
+.plate-empty{color:#a08a68; font-style:italic; font-size:14px}
+.plate-info{font-size:13px; min-height:18px; color:#ffe9a8}
+.serve-row{display:flex; gap:8px; justify-content:center; margin-top:6px}
+.serve-hint{font-size:11.5px; color:#a08a68; margin-top:5px}
+#cook-actions{display:flex; gap:10px; align-items:center; justify-content:center; margin-top:6px; flex-wrap:wrap}
+.action-hint{font-size:12.5px; color:#d9c9a8; max-width:340px}
+
+/* dish plating (dynamic, per recipe + quality) */
+.dish{position:relative; width:170px; height:96px}
+.dish .rice{position:absolute; left:50%; bottom:4px; transform:translateX(-50%); width:132px; height:56px; border-radius:50%; background:radial-gradient(ellipse at 50% 30%, #f7c873, #e09a3e 70%, #b8741f); box-shadow:inset 0 -6px 10px rgba(120,60,0,.35)}
+.dish .rice.pale{background:radial-gradient(ellipse at 50% 30%, #f3e2b8, #e0c88a 70%, #c9a95e)}
+.dish .rice.burnt{background:radial-gradient(ellipse at 50% 30%, #6b4a26, #3d2712 70%, #241505)}
+.dish .egg{position:absolute; left:50%; top:2px; transform:translateX(-50%); width:74px; height:48px; background:#fffdf4; border-radius:50%; box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.dish .egg::after{content:""; position:absolute; left:50%; top:50%; width:26px; height:22px; transform:translate(-50%,-50%); background:radial-gradient(circle at 40% 35%, #ffd34d, #ff9a1c); border-radius:50%}
+.dish .kerupuk{position:absolute; width:34px; height:34px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #fff3c4, #e8b64c); border:2px solid #c98f2b; opacity:.95}
+.dish .kerupuk.k1{right:2px; top:22px; transform:rotate(18deg)}
+.dish .kerupuk.k2{left:2px; top:26px; transform:rotate(-14deg)}
+.dish .cucumber{position:absolute; width:26px; height:26px; border-radius:50%; background:radial-gradient(circle at 50% 50%, #d8f7b0 30%, #7bc043 32%, #4a8a1f 78%); bottom:0; right:14px}
+.dish .cucumber.c2{left:14px; right:auto}
+.dish .onion{position:absolute; width:100%; height:100%; pointer-events:none; font-size:13px; letter-spacing:6px; color:#3fae2a; text-shadow:0 1px 0 #1d5c10}
+.dish .sauce{position:absolute; left:50%; bottom:34px; transform:translateX(-50%) rotate(-4deg); width:120px; height:7px; border-radius:4px; background:linear-gradient(90deg,transparent,#4a2410 20%,#4a2410 80%,transparent)}
+.dish .steam{position:absolute; left:50%; top:-22px; transform:translateX(-50%); font-size:20px; color:#fff; opacity:.75; animation:steamUp 1.8s ease-in-out infinite}
+@keyframes steamUp{0%{transform:translate(-50%,6px); opacity:0}40%{opacity:.8}100%{transform:translate(-50%,-14px); opacity:0}}
+.dish .sparkle{position:absolute; font-size:18px; animation:sparkle 1s ease-in-out infinite alternate}
+@keyframes sparkle{from{transform:scale(.7) rotate(-10deg); opacity:.6}to{transform:scale(1.2) rotate(12deg); opacity:1}}
+
+/* ---------- INGREDIENT COUNTER ---------- */
+#counter{margin-top:6px; background:linear-gradient(180deg,#2e1c0a,#1d1206); border:2px solid var(--line); border-radius:12px; padding:4px 10px}
+#ingredients{display:grid; grid-template-columns:repeat(7,1fr); gap:5px}
+.ing{background:linear-gradient(180deg,#fff8e6,#ffe9a8); color:var(--ink); border:3px solid #d9a441; border-radius:12px; padding:3px 4px 2px; cursor:pointer; text-align:center;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s; box-shadow:0 3px 0 #8a6d2b; user-select:none}
+.ing:hover{transform:translateY(-3px) scale(1.03); border-color:#ff7b1c; box-shadow:0 6px 0 #8a6d2b, 0 8px 14px rgba(0,0,0,.4)}
+.ing:active{transform:scale(.94)}
+.ing .ic{font-size:19px; display:block}
+.ing .nm{font-size:11px; font-weight:800; line-height:1.15; display:block; margin-top:1px}
+.ing .ct{font-size:10px; color:#8a6d00; font-weight:700}
+.ing.bounce{animation:ingBounce .35s ease}
+@keyframes ingBounce{0%{transform:scale(1)}40%{transform:scale(1.18) rotate(-3deg)}100%{transform:scale(1)}}
+.ing.used{opacity:.55; border-color:#7bc043}
+.ing:disabled{opacity:.4; cursor:not-allowed}
+
+/* ---------- OVERLAY / MODALS ---------- */
+#overlay{position:fixed; inset:0; z-index:50; background:rgba(5,2,10,.78); display:flex; align-items:center; justify-content:center; padding:16px; backdrop-filter:blur(2px)}
+#overlay.hidden{display:none}
+#overlay-card{background:linear-gradient(180deg,#3a2410,#241708); border:3px solid #d9a441; border-radius:18px; padding:22px 24px; max-width:640px; width:100%; max-height:88vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,.7); animation:cardIn .3s ease}
+@keyframes cardIn{from{transform:scale(.92) translateY(12px); opacity:0}to{transform:scale(1) translateY(0); opacity:1}}
+#overlay-card h2{color:#ffd34d; font-size:24px; margin-bottom:10px; text-align:center}
+#overlay-card h3{color:#ffb347; margin:12px 0 6px}
+#overlay-card p, #overlay-card li{font-size:15px; line-height:1.5}
+#overlay-card ul{padding-left:20px}
+.modal-btns{display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap}
+.story-scene{text-align:center}
+.story-art{font-size:64px; margin:6px 0}
+.story-text{font-size:16.5px; line-height:1.6; text-align:left; background:rgba(0,0,0,.3); border-radius:12px; padding:14px 16px; margin-top:10px}
+.story-speaker{font-weight:900; color:#ffd34d}
+.dialogue{display:flex; gap:12px; align-items:flex-start; text-align:left}
+.dialogue .portrait{font-size:52px; flex:0 0 60px; text-align:center}
+.ach-row{display:flex; gap:10px; align-items:center; background:rgba(0,0,0,.3); border:1px solid #5a3a1a; border-radius:12px; padding:9px 12px; margin-bottom:8px}
+.ach-row .ic{font-size:26px}
+.ach-row.locked{opacity:.55}
+.ach-row .t{font-weight:900}
+.ach-row .d{font-size:13px; color:#d9c9a8}
+.ach-row .st{margin-left:auto; font-weight:900; color:#7dff9b}
+.upg-row{display:flex; gap:10px; align-items:center; background:rgba(0,0,0,.3); border:1px solid #5a3a1a; border-radius:12px; padding:10px 12px; margin-bottom:8px}
+.upg-row .ic{font-size:28px}
+.upg-row .t{font-weight:900}
+.upg-row .d{font-size:13px; color:#d9c9a8}
+.upg-row .lvl{color:#ffd34d; font-weight:900}
+.stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0}
+.stat-grid .stat{background:rgba(0,0,0,.35); border-radius:10px; padding:10px; text-align:center}
+.stat-grid .stat b{display:block; font-size:24px; color:#ffd34d}
+.stat-grid .stat span{font-size:12.5px; color:#d9c9a8}
+.score-row{display:flex; justify-content:space-between; background:rgba(0,0,0,.3); border-radius:10px; padding:8px 12px; margin-bottom:6px; font-size:15px}
+.score-row.me{border:2px solid #ffd34d}
+
+/* showcase (food presentation close-up) */
+.showcase{text-align:center}
+.showcase .plate-big{margin:8px auto; width:300px; height:180px; border-radius:50%;
+  background:radial-gradient(circle at 50% 38%, #ffffff, #e8e0cc 70%, #cbbfa0);
+  border:5px solid #b8a67e; box-shadow:0 10px 26px rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; position:relative}
+.showcase .plate-big.gold{border-color:#ffd34d; animation:plateGlow 1s ease-in-out infinite alternate}
+.showcase h2{margin-bottom:2px}
+.showcase .quality{font-size:19px; font-weight:900}
+.showcase .quality.perfect{color:#7dff9b}
+.showcase .quality.burned{color:#ff8a8a}
+.showcase .dish-name{font-size:17px; font-weight:800; color:#ffb347}
+
+/* ---------- TOASTS & FLOATERS ---------- */
+#toasts{position:fixed; top:14px; right:14px; z-index:80; display:flex; flex-direction:column; gap:8px; max-width:320px}
+.toast{background:#2e1c0a; border:2px solid #ffd34d; color:#ffe9a8; border-radius:12px; padding:10px 14px; font-weight:800; font-size:14px; box-shadow:0 8px 20px rgba(0,0,0,.5); animation:toastIn .3s ease}
+.toast.gold{border-color:#ffd34d; background:linear-gradient(180deg,#6b4d00,#3a2a00)}
+@keyframes toastIn{from{transform:translateX(40px); opacity:0}to{transform:translateX(0); opacity:1}}
+.toast.out{opacity:0; transform:translateX(40px); transition:all .4s}
+#floaters{position:fixed; inset:0; pointer-events:none; z-index:70; overflow:hidden}
+.floater{position:absolute; font-weight:900; font-size:24px; color:#ffd34d; text-shadow:0 2px 4px rgba(0,0,0,.7); animation:floatUp 1.4s ease-out forwards}
+.floater.green{color:#7dff9b}
+.floater.red{color:#ff8a8a}
+@keyframes floatUp{from{transform:translateY(0) scale(1); opacity:1}to{transform:translateY(-70px) scale(1.15); opacity:0}}
+.coin-fly{position:fixed; z-index:75; font-size:24px; pointer-events:none; transition:all .8s cubic-bezier(.3,.7,.4,1); text-shadow:0 0 10px rgba(255,211,77,.9)}
+
+/* screen shake */
+.shake{animation:screenShake .35s ease}
+@keyframes screenShake{0%,100%{transform:translate(0)}25%{transform:translate(-4px,2px)}50%{transform:translate(4px,-2px)}75%{transform:translate(-2px,-2px)}}
+
+/* confetti (victory) */
+.confetti{position:fixed; top:-10px; z-index:60; width:10px; height:16px; pointer-events:none; animation:confFall linear forwards}
+@keyframes confFall{to{transform:translateY(105vh) rotate(720deg)}}
+
+/* responsive */
+@media (max-width:900px){
+  #ingredients{grid-template-columns:repeat(4,1fr)}
+  .neon-text{font-size:38px}
+  .stage-row{flex-direction:column}
+  #stove{height:170px}
+  .hud-logo{font-size:16px}
+}
+@media (max-width:520px){
+  #ingredients{grid-template-columns:repeat(3,1fr)}
+  .btn-big{font-size:16px; padding:12px 18px}
+  .neon-text{font-size:30px}
+}

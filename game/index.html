@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASGOR RUSH — Indonesian Street Food</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ BACKGROUND CITY / NIGHT ============ -->
+  <div id="city" aria-hidden="true"></div>
+
+  <!-- ============ MENU SCREEN ============ -->
+  <section id="screen-menu" class="screen active">
+    <div class="stall-frame">
+      <div class="awning"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="lantern-row">
+        <div class="lantern l1"></div><div class="lantern l2"></div><div class="lantern l3"></div>
+        <div class="lantern l4"></div><div class="lantern l5"></div>
+      </div>
+      <div class="neon-sign"><span class="neon-text">NASGOR</span><span class="neon-text2">RUSH</span></div>
+      <p class="tagline">Warung Nasi Goreng Paling Rame Se-Kota — Buka Sampai Subuh!</p>
+
+      <div class="menu-buttons">
+        <button id="btn-play" class="btn btn-big btn-primary">🍳 MULAI MASAK</button>
+        <button id="btn-story" class="btn btn-big btn-gold">📖 MODE CERITA</button>
+        <div class="menu-row">
+          <button id="btn-howto" class="btn">❓ CARA MAIN</button>
+          <button id="btn-upgrades" class="btn">🔧 UPGRADE DAPUR</button>
+          <button id="btn-achievements" class="btn">🏆 PRESTASI <span id="ach-count" class="pill">0/6</span></button>
+        </div>
+        <div class="menu-row">
+          <button id="btn-challenge" class="btn">📅 TANTANGAN HARIAN</button>
+          <button id="btn-scores" class="btn">⭐ SKOR TERBAIK</button>
+          <button id="btn-sound" class="btn">🔊 SUARA: ON</button>
+        </div>
+      </div>
+
+      <div class="menu-info">
+        <div class="info-card" id="daily-chip">
+          <div class="info-title">📅 Tantangan Hari Ini</div>
+          <div id="daily-desc" class="info-body">—</div>
+          <div id="daily-progress" class="info-body small">0 / 0</div>
+        </div>
+        <div class="info-card">
+          <div class="info-title">💰 Koin Kamu</div>
+          <div class="info-body big"><span id="menu-coins">0</span> 🪙</div>
+          <div class="info-body small">Level terbuka: <b id="menu-level">1</b> / 10</div>
+        </div>
+        <div class="info-card">
+          <div class="info-title">⭐ Skor Terbaik</div>
+          <div class="info-body big" id="menu-best">0</div>
+          <div class="info-body small">Total pelanggan dilayani: <b id="menu-served">0</b></div>
+        </div>
+      </div>
+      <p class="credit">Dibuat dengan ❤️ di warung pinggir jalan • v1.0</p>
+    </div>
+  </section>
+
+  <!-- ============ GAME SCREEN ============ -->
+  <section id="screen-game" class="screen">
+    <!-- HUD -->
+    <header id="hud">
+      <div class="hud-logo">🍳 NASGOR <b>RUSH</b></div>
+      <div class="hud-stat">LEVEL <b id="hud-level">1</b></div>
+      <div class="hud-stat">SKOR <b id="hud-score">0</b> <span class="dim">/ <span id="hud-target">300</span></span></div>
+      <div class="hud-stat">🪙 <b id="hud-coins">0</b></div>
+      <div class="hud-stat">⏱ <b id="hud-time">150</b> dtk</div>
+      <div class="hud-stat combo" id="hud-combo" hidden>🔥 COMBO x<span id="hud-combo-n">2</span></div>
+      <div class="hud-stat event" id="hud-event" hidden>⚡ <span id="hud-event-name"></span> <b id="hud-event-time"></b></div>
+      <button id="btn-pause" class="btn btn-small">⏸ JEDA</button>
+      <button id="btn-music" class="btn btn-small">🎵</button>
+      <button id="btn-sfx" class="btn btn-small">🔊</button>
+    </header>
+
+    <!-- EVENT BANNER -->
+    <div id="event-banner" class="hidden"></div>
+
+    <!-- CUSTOMER ORDER BOARD -->
+    <div id="order-board">
+      <div class="board-title">📋 PESANAN PELANGGAN <span id="board-count" class="dim"></span></div>
+      <div id="customers"></div>
+      <div id="no-customers" class="empty-note">Pelanggan pertama sedang jalan ke warung… 🚶</div>
+    </div>
+
+    <!-- COOKING STAGE -->
+    <div id="stage">
+      <div class="stall-back">
+        <div class="stall-sign">WARUNG RAKA • NASGOR • MIE • KOPI</div>
+        <div id="decor-lanterns" class="lantern-row small">
+          <div class="lantern l1"></div><div class="lantern l2"></div><div class="lantern l3"></div>
+        </div>
+        <div id="decor-banner" class="decor-banner hidden">🎉 GRATIS KRUPUK HARI INI 🎉</div>
+        <div id="decor-plant" class="decor-plant hidden">🪴</div>
+      </div>
+
+      <div class="stage-row">
+        <!-- WOK -->
+        <div id="wok-area">
+          <div class="wok-label">🔥 WOK &amp; KOMPOR</div>
+          <div id="stove">
+            <div class="flame f1"></div><div class="flame f2"></div><div class="flame f3"></div>
+            <div id="wok">
+              <canvas id="fx" width="360" height="180"></canvas>
+              <div id="wok-food"></div>
+              <div id="spatula">🥄</div>
+            </div>
+          </div>
+          <div id="cook-status" class="cook-status">Wok kosong — pilih bahan dulu!</div>
+          <div class="progress-wrap">
+            <div id="cook-bar"><div id="cook-fill"></div><div id="cook-perfect-zone"></div></div>
+            <div class="progress-marks"><span>mentah</span><span>PERFECT</span><span>gosong</span></div>
+          </div>
+          <div id="wok-contents" class="wok-contents"></div>
+        </div>
+
+        <!-- PLATE / SERVING -->
+        <div id="plate-area">
+          <div class="wok-label">🍽️ PIRING SAJI</div>
+          <div id="plate">
+            <div id="plate-dish" class="plate-empty">Piring kosong</div>
+          </div>
+          <div id="plate-info" class="plate-info">Belum ada hidangan di piring.</div>
+          <div class="serve-row">
+            <button id="btn-serve" class="btn btn-primary" disabled>🍽️ SAJIKAN</button>
+            <button id="btn-reset" class="btn">↺ RESET</button>
+          </div>
+          <div class="serve-hint">Sajikan ke pelanggan yang pesanannya cocok. Salah sajian = −25 skor &amp; combo hilang!</div>
+        </div>
+      </div>
+
+      <div id="cook-actions">
+        <button id="btn-cook" class="btn btn-big btn-fire" disabled>🔥 MASAK</button>
+        <button id="btn-plate" class="btn btn-big btn-gold" disabled>🍛 ANGKAT KE PIRING</button>
+        <div class="action-hint">1) Klik bahan → 2) MASAK → 3) ANGKAT saat di zona PERFECT → 4) SAJIKAN</div>
+      </div>
+    </div>
+
+    <!-- INGREDIENT COUNTER -->
+    <div id="counter">
+      <div class="board-title">🧺 BAHAN DI MEJA <span class="dim">— klik untuk masukkan ke wok</span></div>
+      <div id="ingredients"></div>
+    </div>
+  </section>
+
+  <!-- ============ OVERLAYS ============ -->
+  <div id="overlay" class="hidden"><div id="overlay-card"></div></div>
+
+  <!-- TOASTS -->
+  <div id="toasts"></div>
+  <!-- FLOATING SCORE -->
+  <div id="floaters"></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

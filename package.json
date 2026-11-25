@@ -1,0 +1,1 @@
+{"description":"NASGOR RUSH — Indonesian street-food cooking game. Entry for the make.fun best-cooking-game bounty.","engines":{"node":">=22"},"license":"MIT","name":"nasgor-rush","scripts":{"serve":"python3 -m http.server 8080 --directory game","start":"python3 -m http.server 8080 --directory game","validate":"node main.ts"},"type":"module","version":"1.0.0"}
